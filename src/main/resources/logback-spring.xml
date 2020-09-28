@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <springProfile name="win-local">
+        <appender name="WIN-LOCAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>C:/logs/git-commit/app.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>
+                    C:/logs/git-commit/app-%d{yyyy-MM-dd}.%i.log
+                </fileNamePattern>
+                <maxHistory>5</maxHistory>
+                <maxFileSize>100MB</maxFileSize>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{15} %msg%n</pattern>
+            </encoder>
+        </appender>
+        <logger name="com.pingidentity" level="debug" additivity="true">
+            <appender-ref ref="WIN-LOCAL"/>
+        </logger>
+    </springProfile>
+
+    <springProfile name="docker">
+        <appender name="DOCKER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/opt/logs/app.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>
+                    /opt/logs/app-%d{yyyy-MM-dd}.%i.log
+                </fileNamePattern>
+                <maxHistory>5</maxHistory>
+                <maxFileSize>100MB</maxFileSize>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{15} %msg%n</pattern>
+            </encoder>
+        </appender>
+        <logger name="com.pingidentity" level="debug" additivity="true">
+            <appender-ref ref="DOCKER"/>
+        </logger>
+    </springProfile>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{15} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: default
+
+dynamoDb:
+  url: somefakeurl
+  region: us-east-1
+
+backendType: simple
+
+jira:
+  ids: SSD, XYZ
+
+notify:
+  email:
+    enabled: false
+    addresses: awhitlatch911@gmail.com, aerinai@hotmail.com
+    fromAddress: no-reply@pingidentity.com
+  log:
+    enabled: true
+
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username:
+  password:
+  smtp:
+    auth: true
+    starttls-enable: true
+
+---
+spring:
+  profiles: win-local
